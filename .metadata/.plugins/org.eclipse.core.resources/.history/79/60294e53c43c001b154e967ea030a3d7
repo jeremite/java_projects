@@ -1,0 +1,63 @@
+package findIP;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class NetworkDemo extends JFrame implements ActionListener{
+	int FindIPCount =0;
+	int noCount =0;
+	int listCnt=0;
+	String sdate="";
+	
+	String myList ="";
+	JFrame frm;
+	JTextField tf;
+	JLabel l;
+	JLabel lab;
+	JTextArea txta;
+	JButton b;
+	JButton b0;
+	JButton b2;
+	JLabel txtLab;
+	
+	public String getDate() {
+		String fmt = "MMM-dd-YYYY HH:MM:SS";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(fmt);
+		String date = simpleDateFormat.format(new Date());
+		return date;
+	}
+	
+	NetworkDemo(){
+		frm = new JFrame();
+		
+		tf = new JTextField();
+		tf.setBounds(50,50,150,20);
+		l = new JLabel();
+		l.setBounds(50, 100, 250, 20);
+		lab = new JLabel();
+		lab.setBounds(250,120,100,200);
+		lab.setFont(new Font("Serif", Font.BOLD, 18));
+		
+		txtLab = new JLabel();
+		txtLab.setBounds(220,150,100,20);
+		txtLab.setFont(new Font("Serif", Font.BOLD, 16));
+		txtLab.setForeground(Color.BLUE);
+		txtLab.setText("Sites Vissited");
+		txta = new JTextArea();
+		txta.setBounds(185,180,170,150);
+		
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

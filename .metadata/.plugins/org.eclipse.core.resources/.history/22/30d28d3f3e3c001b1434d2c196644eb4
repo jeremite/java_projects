@@ -1,0 +1,16 @@
+package scanit;
+import java.util.Scanner;
+
+public class ScannerConsole {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner myScan = new Scanner(System.in);
+		System.out.println("Enter username");
+		
+		String userName = myScan.nextLine();
+		System.out.println("Greetings "+userName);
+		myScan.close();
+	}
+
+}

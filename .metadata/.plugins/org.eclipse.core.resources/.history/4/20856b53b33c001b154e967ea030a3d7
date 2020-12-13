@@ -1,0 +1,28 @@
+package theAWT;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AWTListenerExample {
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Frame f = new Frame("ActionListener Demo");
+		final TextField mytf = new TextField();
+		mytf.setBounds(50,50,250,20);
+		Button b = new Button("Click here");
+		b.setBounds(50,100,85,30);
+		
+		b.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent evn) {
+				mytf.setText("Welcom to this Java AWT Lesson");
+			}
+		});
+		
+		f.add(b);
+		f.add(mytf);
+		f.setSize(400, 400);
+		f.setLayout(null);
+		f.setVisible(true);
+	}
+
+}

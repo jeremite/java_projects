@@ -1,0 +1,193 @@
+package order;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Orderit extends JFrame implements ActionListener{
+	JFrame frm;
+	JLabel l,labq,labItm,labGetIt;
+	JCheckBox cb1,cb2,cb3;
+	JButton btn;
+	JTextField tf2,tf3;
+	JRadioButton rbDel, rbPickUp, rbInStore;
+	JComboBox combo;
+	
+	double pizza = 10.00;
+	double burger = 5.00;
+	double soda = 2.00;
+	
+	double pizzatot;
+	double burgertot;
+	double sodaTotal;
+	double grandTotal;
+	
+	int frmX=500;
+	int frmY=400;
+	String pizzaCaption = "Pizza for $"+pizza;
+	String burgerCaption = "Burger for $"+burger;
+	String sodaCaption = "Drink for $"+soda;
+	String theOrder="";
+	String getIt="";
+	int orderNum=100;
+	
+	Orderit(){
+		frm = new JFrame();
+		frm.setTitle("Place Your Order");
+		tf2 = new JTextField();
+		tf3 = new JTextField();
+		rbDel = new JRadioButton("Delivery");
+		rbPickUp = new JRadioButton("Curb Side Pickup");
+		rbInStore = new JRadioButton("In Store Pickup");
+		ButtonGroup bg = new ButtonGroup();
+		bg.add(rbDel);
+		bg.add(rbPickUp);
+		bg.add(rbInStore);
+		
+		String amt[]={"","1","2","3","4","5","6","7","8","9","10"};
+		combo = new JComboBox(amt);
+		combo.setSelectedIndex(0);
+		
+		l = new JLabel("Fodd Ordering System");
+		labq = new JLabel("QTY");
+		labItm = new JLabel("ITems");
+		labGetIt = new JLabel("Get It");
+		cb1 = new JCheckBox(pizzaCaption);
+		cb2 = new JCheckBox(burgerCaption);
+		cb3 = new JCheckBox(sodaCaption);
+		btn = new JButton("Submit Order");
+		
+		l.setBounds(170,5,300,20);
+		labq.setBounds(150,35,35,25);
+		labItm.setBounds(195,35,50,25);
+		labGetIt.setBounds(50,210,160,25);
+		cb1.setBounds(190,60,200,25);
+		cb2.setBounds(190,90,200,25);
+		cb3.setBounds(190,120,200,25);
+		btn.setBounds(150,189,150,40);
+		rbDel.setBounds(60,230,150,25);
+		rbPickUp.setBounds(60,250,150,25);
+		rbInStore.setBounds(60,270,150,25);
+		rbInStore.setSelected(true);
+		rbInStore.setText("Get It");
+		combo.setBounds(128,63,45,22);
+		tf2.setBounds(150,90,25,22);
+		tf3.setBounds(150,120,25,22);
+		
+		frm.add(l);
+		frm.add(labq);
+		frm.add(labItm);
+		frm.add(labGetIt);
+		frm.add(cb1);
+		frm.add(cb2);
+		frm.add(cb3);
+		frm.add(btn);
+		frm.add(tf2);
+		frm.add(tf3);
+		frm.add(rbDel);
+		frm.add(rbInStore);
+		frm.add(rbPickUp);
+		frm.add(combo);
+		frm.setLayout(null);
+		frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frm.setSize(frmX,frmY);
+		frm.setLocationRelativeTo(null);
+		frm.setVisible(true);
+		
+		btn.addActionListener(this);
+		
+		
+		
+
+	}
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btn) {
+			if(cb1.isSelected()) {
+				try {
+					String sel = combo.getSelectedItem().toString();
+					int qty = Integer.parseInt(sel);
+					pizzatot = qty*pizza;
+					grandTotal += pizzatot;
+					theOrder = theOrder+qty+" pizza @ $"+pizza+", subTotal $"+pizzatot+"\n";
+					
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(this,"Pizza checked, but no qty selected for pizzar");
+					combo.setSelectedIndex(0);
+					pizzatot=0;
+					grandTotal=0;
+					getIt="";
+					theOrder="";
+					return;
+				}
+			}
+			if(cb2.isSelected()) {
+				try {
+					int qty = Integer.parseInt(tf2.getText());
+					burgertot = qty*burger;
+					grandTotal += burgertot;
+					theOrder = theOrder+qty+" burgers @ $"+burger+", subTotal $"+burgertot+"\n";
+					
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(this,"Burger checked, but no qty selected for pizzar");
+					tf2.setText(null);
+					burgertot=0;
+					grandTotal=0;
+					getIt="";
+					theOrder="";
+					return;
+				}
+			}
+			if(cb3.isSelected()) {
+				try {
+					int qty = Integer.parseInt(tf3.getText());
+					sodaTotal = qty*soda;
+					grandTotal += sodaTotal;
+					theOrder = theOrder+qty+" sodas @ $"+soda+", subTotal $"+sodaTotal+"\n";
+					
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(this,"Soda checked, but no qty selected for pizzar");
+					tf3.setText(null);
+					sodaTotal=0;
+					grandTotal=0;
+					getIt="";
+					theOrder="";
+					return;
+				}
+			}
+			if(rbDel.isSelected()) {
+				getIt ="Delevery\n";
+			}else if(rbPickUp.isSelected()) {
+				getIt = "Curb Side PickUp\n";
+			}else if(rbInStore.isSelected()) {
+				getIt="In Store Pickup\n";
+			}
+			
+			if(cb1.isSelected()==false && cb2.isSelected()==false && cb3.isSelected()==false) {
+				JOptionPane.showMessageDialog(this, "No Items selected");
+				return;
+			}else {
+				String seperator = "\n"+"--------------------\n";
+				orderNum++;
+				JOptionPane.showMessageDialog(this, "Thanks. Order Submitted.\n Order Number: "+orderNum+"\n\n"+theOrder+seperator+"Grand total: $"+grandTotal+"\n\n");
+				pizzatot=0;
+				burgertot=0;
+				sodaTotal=0;
+				grandTotal=0;
+				getIt="";
+				theOrder="";
+				combo.setSelectedIndex(0);
+				tf2.setText(null);
+				tf3.setText(null);
+				cb1.setSelected(false);
+				cb2.setSelected(false);
+				cb3.setSelected(false);
+				rbInStore.setSelected(true);
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Orderit order = new Orderit();
+	}
+
+}

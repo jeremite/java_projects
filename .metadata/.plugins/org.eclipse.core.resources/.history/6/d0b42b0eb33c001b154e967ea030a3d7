@@ -1,0 +1,12 @@
+package theAWT;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AWTListenerExample {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
